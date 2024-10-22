@@ -95,10 +95,12 @@ app.get("/api/v1/categories", async (c) => {
 
 app.get("/api/v1/products", async (c) => {
   const page = c.req.query("page");
+  const categoryId = c.req.query("categoryId");
 
   const paginatedProducts = paginate(
     PRODUCTS,
-    page === undefined ? 1 : parseInt(page)
+    page === undefined ? 1 : parseInt(page),
+    categoryId ? parseInt(categoryId) : undefined
   );
 
   return c.json({
@@ -127,7 +129,14 @@ serve({
 
 //
 
-function paginate(collection: Array<ResponseProduct>, page: number) {
+function paginate(collection: Array<ResponseProduct>, page: number, categoryId?: number) {
+
+  if (categoryId) {
+    collection = collection.filter((product) => {
+      return product.categoryId === (categoryId)
+    });
+  }
+
   const perPage = 10;
   let totalPages = collection.length / perPage;
   totalPages = Math.ceil(totalPages);
