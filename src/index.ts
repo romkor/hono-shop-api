@@ -6,7 +6,7 @@ import { HTTPException } from "hono/http-exception";
 import { logger } from "hono/logger";
 import { HTTPExceptionFunction, timeout } from "hono/timeout";
 
-import Data from "../data/products.json";
+import Data from "./data/products.json";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 
