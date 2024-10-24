@@ -81,7 +81,7 @@ app.use("/public/*", serveStatic({ root: "./" }));
 
 app.get("/", (c) => {
   return c.json({
-    title: "Hello Hono!",
+    status: "Alive",
   });
 });
 
